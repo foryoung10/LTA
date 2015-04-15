@@ -31,6 +31,38 @@ angular.module('starter.services', [])
     face: 'https://pbs.twimg.com/profile_images/491995398135767040/ie2Z_V6e.jpeg'
   }];
 
+//hardcoded first for testing
+  var busList = [{
+    BusStopID: 1,
+    ServiceNo: 10,
+    Status: Operating,
+    EstimatedArrival: 5,
+    Load: 100,
+    Feature: "WAB"
+  }, {
+    BusStopID: 1,
+    ServiceNo: 20,
+    Status: Operating,
+    EstimatedArrival: 10,
+    Load: 100,
+    Feature: "WAB"
+  }, {
+    BusStopID: 1,
+    ServiceNo: 30,
+    Status: Operating,
+    EstimatedArrival: 8,
+    Load: 100,
+    Feature: ""
+  }, {
+    BusStopID: 1,
+    ServiceNo: 40,
+    Status: Operating,
+    EstimatedArrival: 5,
+    Load: 100,
+    Feature: "WAB"
+  }];
+
+
   return {
     all: function() {
       return chats;
