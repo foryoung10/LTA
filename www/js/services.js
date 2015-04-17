@@ -1,4 +1,4 @@
-angular.module('starter.services', [])
+angular.module('starter.services', ['ngRoute','ngResource'])
 
 .factory('Chats', function() {
   // Might use a resource here that returns a JSON array
@@ -32,37 +32,37 @@ angular.module('starter.services', [])
   }];
 
 //hardcoded first for testing
-  var busList = [{
-    BusStopID: 1,
-    ServiceNo: 10,
-    Status: Operating,
-    EstimatedArrival: 5,
-    Load: 100,
-    Feature: "WAB"
-  }, {
-    BusStopID: 1,
-    ServiceNo: 20,
-    Status: Operating,
-    EstimatedArrival: 10,
-    Load: 100,
-    Feature: "WAB"
-  }, {
-    BusStopID: 1,
-    ServiceNo: 30,
-    Status: Operating,
-    EstimatedArrival: 8,
-    Load: 100,
-    Feature: ""
-  }, {
-    BusStopID: 1,
-    ServiceNo: 40,
-    Status: Operating,
-    EstimatedArrival: 5,
-    Load: 100,
-    Feature: "WAB"
-  }];
+//  var busList = [{
+//    BusStopID: 1,
+//    ServiceNo: 10,
+//    Status: Operating,
+//    EstimatedArrival: 5,
+//    Load: 100,
+//    Feature: "WAB"
+//  }, {
+//    BusStopID: 1,
+//    ServiceNo: 20,
+//    Status: Operating,
+//    EstimatedArrival: 10,
+//    Load: 100,
+//    Feature: "WAB"
+//  }, {
+//    BusStopID: 1,
+//    ServiceNo: 30,
+//    Status: Operating,
+//    EstimatedArrival: 8,
+//    Load: 100,
+//    Feature: ""
+//  }, {
+//    BusStopID: 1,
+//    ServiceNo: 40,
+//    Status: Operating,
+//    EstimatedArrival: 5,
+//    Load: 100,
+//    Feature: "WAB"
+//  }];
 
-
+        return $resource('http://api.flickr.com/services/feeds/photos_public.gne', { format: 'json', jsoncallback: 'JSON_CALLBACK' }, { 'load': { 'method': 'JSONP' } });
   return {
     all: function() {
       return chats;
@@ -77,6 +77,29 @@ angular.module('starter.services', [])
         }
       }
       return null;
+    },
+    bus: function($resource){
+      $console.log('gettingBus')
+      apikey ='0AnA9eXsKIAUtjgtqGvsmA4EqLx6eu3U'
+      lat = 1.33508445119327
+      lon = 103.747943090179
+      distance = 100
+      return $resource('http://api.onemobility.sg/lta-bus-stops-arrival?apikey='+apikey+'&lat='+lat+'&lon='+lon+'&distance='+distance, { format: 'json', jsoncallback: 'JSON_CALLBACK' }, { 'load': { 'method': 'JSONP' } });
     }
   };
-});
+})
+
+.factory('Bus', function($resource) {
+      console.log('gettingBus')
+      apikey ='0AnA9eXsKIAUtjgtqGvsmA4EqLx6eu3U'
+      lat = 1.33508445119327
+      lon = 103.747943090179
+      distance = 100
+      console.log(distance)
+      return $resource('http://api.onemobility.sg/lta-bus-stops-arrival?apikey='+apikey+'&lat='+lat+'&lon='+lon+'&distance='+distance, 
+	  {format: 'json', jsoncallback: 'JSON_CALLBACK' }, 
+	  {'load': { 'method': 'JSONP' } });
+      console.log($resource)
+      console.log('got')
+    }
+)
